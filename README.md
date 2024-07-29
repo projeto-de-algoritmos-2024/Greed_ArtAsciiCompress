@@ -22,35 +22,50 @@ Com isso, visa-se alcançar maior compreenção do algoritimo ambicioso de codif
 
 ## Arte ASCII
 
-1. **Origens e Desenvolvimento Inicial:**
-   - **Typewriter Art**: Antes dos computadores modernos, já existia uma forma semelhante de arte realizada com máquinas de escrever, conhecida como typewriter art. Nesse contexto, os artistas criavam desenhos e padrões usando os caracteres disponíveis nas máquinas de escrever.
-   - A **ASCII Art** tem suas raízes nos primórdios da computação, quando os computadores eram usados principalmente para processar texto e não possuíam capacidade gráfica avançada.
-   - Na década de 1960, o **Padrão ASCII** (American Standard Code for Information Interchange) foi estabelecido. Esse padrão definiu um conjunto de 128 caracteres, incluindo letras maiúsculas e minúsculas, números, símbolos de pontuação e caracteres de controle.
-   - Artistas e entusiastas começaram a explorar maneiras criativas de usar esses caracteres para criar imagens e ilustrações.
+<details>
+<summary><strong>1. Origens e Desenvolvimento Inicial:</strong></summary>
 
-3. **Kenneth Knowlton e os Laboratórios Bell:**
-   - Um dos pioneiros em arte computacional foi Kenneth Knowlton, que trabalhava nos Laboratórios Bell na década de 1960.
-   - Knowlton criou algumas das primeiras **ASCII Arts**, usando impressoras que frequentemente não tinham capacidade gráfica. Ele usava os caracteres disponíveis para formar padrões e desenhos.
-   - Essas criações eram frequentemente impressas em grandes páginas de banner, facilitando a separação dos resultados por operadores ou funcionários de computador.
+- **Typewriter Art**: Antes dos computadores modernos, já existia uma forma semelhante de arte realizada com máquinas de escrever, conhecida como typewriter art. Nesse contexto, os artistas criavam desenhos e padrões usando os caracteres disponíveis nas máquinas de escrever.
+- A **ASCII Art** tem suas raízes nos primórdios da computação, quando os computadores eram usados principalmente para processar texto e não possuíam capacidade gráfica avançada.
+- Na década de 1960, o **Padrão ASCII** (American Standard Code for Information Interchange) foi estabelecido. Esse padrão definiu um conjunto de 128 caracteres, incluindo letras maiúsculas e minúsculas, números, símbolos de pontuação e caracteres de controle.
+- Artistas e entusiastas começaram a explorar maneiras criativas de usar esses caracteres para criar imagens e ilustrações.
+</details>
 
-4. **Popularização na Década de 1970:**
-   - Durante a década de 1970, a **ASCII Art** se tornou mais popular à medida que os computadores pessoais e mainframes se espalhavam.
-   - Programadores, hackers e entusiastas começaram a criar arte usando os caracteres ASCII disponíveis em seus terminais de texto.
-   - A **ASCII Art** era usada em banners, cabeçalhos de documentos, cartazes e até mesmo em jogos de texto.
+<details>
+<summary><strong>3. Kenneth Knowlton e os Laboratórios Bell:</strong></summary>
 
-5. **Variedade e Criatividade:**
-   - A criatividade na **ASCII Art** era vasta. Alguns artistas criavam retratos detalhados, enquanto outros faziam padrões abstratos ou ilustrações temáticas.
-   - A limitação dos 95 caracteres imprimíveis do **Padrão ASCII** incentivava a inovação. Artistas usavam diferentes combinações de caracteres para obter sombras, texturas e detalhes.
-   - Classes:
-      - Typewriter art,
-      - Text art,
-      - TTY e RTTY art,
-      - Line art,
-      - Block art; e outros.
+- Um dos pioneiros em arte computacional foi Kenneth Knowlton, que trabalhava nos Laboratórios Bell na década de 1960.
+- Knowlton criou algumas das primeiras **ASCII Arts**, usando impressoras que frequentemente não tinham capacidade gráfica. Ele usava os caracteres disponíveis para formar padrões e desenhos.
+- Essas criações eram frequentemente impressas em grandes páginas de banner, facilitando a separação dos resultados por operadores ou funcionários de computador.
+</details>
 
-6. **Declínio e Revival:**
-   - Com o advento dos gráficos de alta resolução e a popularização da internet, a **ASCII Art** perdeu parte de sua relevância.
-   - No entanto, houve um renascimento nos últimos anos, com artistas digitais revisitando essa forma de expressão e criando novas obras usando caracteres ASCII.
+<details>
+<summary><strong>4. Popularização na Década de 1970:</strong></summary>
+
+- Durante a década de 1970, a **ASCII Art** se tornou mais popular à medida que os computadores pessoais e mainframes se espalhavam.
+- Programadores, hackers e entusiastas começaram a criar arte usando os caracteres ASCII disponíveis em seus terminais de texto.
+- A **ASCII Art** era usada em banners, cabeçalhos de documentos, cartazes e até mesmo em jogos de texto.
+</details>
+
+<details>
+<summary><strong>5. Variedade e Criatividade:</strong></summary>
+
+- A criatividade na **ASCII Art** era vasta. Alguns artistas criavam retratos detalhados, enquanto outros faziam padrões abstratos ou ilustrações temáticas.
+- A limitação dos 95 caracteres imprimíveis do **Padrão ASCII** incentivava a inovação. Artistas usavam diferentes combinações de caracteres para obter sombras, texturas e detalhes.
+- Classes:
+  - Typewriter art,
+  - Text art,
+  - TTY e RTTY art,
+  - Line art,
+  - Block art; e outros.
+</details>
+
+<details>
+<summary><strong>6. Declínio e Revival:</strong></summary>
+
+- Com o advento dos gráficos de alta resolução e a popularização da internet, a **ASCII Art** perdeu parte de sua relevância.
+- No entanto, houve um renascimento nos últimos anos, com artistas digitais revisitando essa forma de expressão e criando novas obras usando caracteres ASCII.
+</details>
 
 7. **Aplicação no contexto do projeto: ArtAsciiCompress**
    - Perceba que **ASCII art** é uma forma de representar figuras gráficas por elementos textuais do padrão ASCII, os quais possuem densidadese visuais e capacidades representativas distintas. *Por exemplo*: caracteres como '#', '@', '*' e '.' podem ser usados para simular diferentes níveis de tonalidade entre clara, intermediária e escura.
@@ -59,48 +74,70 @@ Com isso, visa-se alcançar maior compreenção do algoritimo ambicioso de codif
 
 Em resumo, a **ASCII Art** é uma forma criativa e nostálgica de expressão visual que remonta aos primórdios da computação e continua a inspirar artistas e entusiastas até hoje.
 
-Claro! Vamos aprofundar os detalhes do **algoritmo de Huffman**, incluindo sua premissa, demonstração matemática e considerações sobre seu desempenho. Também abordarei possíveis restrições e limitações, especialmente em relação à compressão de imagens.
-
 ## Código de Huffman
 
-O **algoritmo de Huffman** é um método de **compressão de dados sem perdas** que otimiza o espaço usando **códigos variáveis** baseados na frequência dos caracteres. Ele oferece insights valiosos em análise de frequência e otimização de algoritmos, com aplicações além da compressão de dados².
+O **algoritmo de Huffman** é um método de **compressão de dados sem perdas** que otimiza o espaço usando **códigos variáveis** baseados na frequência dos caracteres. Ele oferece insights valiosos em análise de frequência e otimização de algoritmos, com aplicações além da compressão de dados.
 
 ### Premissa do Algoritmo de Huffman
 
-A ideia fundamental do **algoritmo de Huffman** é usar **códigos curtos** para os caracteres que ocorrem com **maior frequência** e deixar os códigos mais longos para os caracteres mais raros. Esses códigos são, portanto, de **comprimento variável**. A escolha da melhor tabela de códigos é o segredo do algoritmo de Huffman¹.
+A ideia fundamental do **algoritmo de Huffman** é usar **códigos curtos** para os caracteres que ocorrem com **maior frequência** e deixar os códigos mais longos para os caracteres mais raros. Esses códigos são, portanto, de **comprimento variável**. A escolha da melhor tabela de códigos é o segredo do algoritmo de Huffman.
 
-### Demonstração Matemática
+### Definição e Corretude do Algoritimo
+<details>
+<summary>Definição</summary>
+ 
+Códigos *livres de prefixo* são aqueles onde, dados dois caracteres quaisquer $i$ e $j$ representados pela codificação, a sequência de bits associadas a $i$ **não** é um *prefixo* da sequência associada a $j$. Em outras palavras, não há nenhuma sequência de bits que seja um prefixo de outra sequência no código.
 
-Vamos provar que o algoritmo de Huffman é ótimo em termos de comprimento médio de bits por símbolo. Para isso, consideremos o seguinte:
+**_Note_**: Sempre há uma solução ótima do problema da codificação que é dado por um código *livre de prefixo*.
 
-1. **Teorema de Shannon**:
-   - O comprimento médio de bits por símbolo em qualquer codificação de fonte não pode ser menor que a **entropia** da fonte.
-   - A **entropia** é uma medida da incerteza ou imprevisibilidade da fonte.
+<details>
+ <summary>Dem.</summary>
+    - Suponha um conjunto de caracteres $C = {c_1, c_2, \ldots, c_n}$ que precisam ser codificados. Assim, objetiva-se encontrar um código livre de prefixo para esses caracteres. Além disso, seja $L$ o comprimento médio do código, o qual queremos minimizar.
+    - Suponha que temos dois caracteres i e j no código ótimo, onde a sequência de bits associada a i é um prefixo da sequência associada a j.
+    - Agora, trocaremos as sequências de bits associadas a i e j. Ou seja, atribuiremos a sequência de bits originalmente associada a j a i e vice-versa.
+    - Essa troca não viola a propriedade de prefixo, pois agora a sequência de bits originalmente associada a i não é mais um prefixo da sequência associada a j.
+    - Além disso, o comprimento médio do código após a troca não será maior do que o comprimento médio original, pois estamos apenas trocando sequências de bits sem alterar seus comprimentos individuais.
+    - Portanto, após essa troca, obtemos um código com comprimento médio menor ou igual ao código original, mas que é livre de prefixo.
+    - Repetindo esse processo para todos os pares de caracteres onde a sequência de bits de um é um prefixo da sequência do outro, eventualmente obteremos um código livre de prefixo com comprimento médio igual ou menor do que o código original.
+    - Assim, sempre existe uma solução ótima para o problema da codificação que é dada por um código livre de prefixo.
+</details>
+</details>
+<details>
+ <summary>Corretude</summary>
 
-2. **Entropia**:
-   - A entropia de uma fonte discreta com probabilidades $(p_1, p_2, \ldots, p_n)$ é dada por:
-
-     $$H(X) = - \sum_{i=1}^{n} p_i \ log_2(p_i)$$
-
-3. **Codificação de Huffman**:
+ 1. **Codificação de Huffman**:
    - O algoritmo de Huffman constrói uma árvore binária de códigos de prefixo, onde os códigos são atribuídos com base nas frequências dos símbolos.
    - A árvore de Huffman é construída de forma a minimizar o comprimento médio de bits por símbolo.
+   - Ideia do algoritimo de Huffman:
+     - Começar com $|C|$ folhas e realizar sequencialmente  $|C| - 1$ operações de "intercalação" de dois vertices da árvore. Cada uma destas intercalações dá origem a um novo vértice interno que será o **pai** dos vertices que participarem da intercalação.
+     - A escolha do par de vertices que dará origem a intercalação em cada passo depende da soma das frequências das folhas das subárvores com raizes nos vertices que ainda não participaram de intercalações.
 
-4. **Tamanho do arquivo comprimido**
+2. **Tamanho do arquivo comprimido**
 Se $T$ é a árvore que representa a codificação, $d_T(c)$ é a profundidade da folha representando o caracter $c$ e $f(c)$ é a sua frequência, o tamanho do arquivo comprimido será:
+
 $$B(T) = \sum_{c \in C} f(c) \ d_T(c) \ \ .$$
 
 - $B(T)$ é o custo da árvore T, extamente o tamanho do arquivo codificado.
- 
-6. **Prova**:
-   - A árvore de Huffman é construída de forma a aproximar a entropia da fonte.
-   - Portanto, o comprimento médio de bits por símbolo usando Huffman é próximo à entropia da fonte.
-   - Como a entropia é o limite inferior para o comprimento médio de bits, o algoritmo de Huffman é ótimo.
+
+3. **Lema 1 (escolha ambiciosa)**
+
+Seja $C$ um alfabeto onde cada caracter $c \in C$ tem frequência $f[c]$. Sejam $x$ e $y$ dois caracteres em $C$ com as menores frequências. Então, existe um código ótimo livre de prefixo para $C$ no qual os códigos para $x$ e $y$ tem o mesmo comprimento e diferem apenas no último bit.
+
+4. **Lema 2 (subestrutura ótima)**
+
+Suponha $C$ um alfabeto com frequência $f[c]$ definida para cada caracter $c \in C$. Sejam $x$ e $y$ dois caracteres de $C$ com as menores frequências. Além disso, seja $C'$ o alfabeto obtido pela remoção de $x$ e $y$ e pela inclusão de um novo caracter $z$; logo, $C' = C \cup (z) - (x, y)$. As frequências dos caracteres em $C' \cap C$ são as mesmas que em $C$, e $f[z]$ é definida como sendo $f[z] = f[x] + f[y]$.
+
+Seja $T'$ uma árvore binária representando um código ótimo, livre de prefixo para $C'$. Então, a árvore binária $T$ obtida de $T'$ substituindo-se o vertice (folha) $z$ por um vertice interno tendo $x$ e $y$ como filhos, representa um código ótimo livre de prefixo para $C$.
+
+5. **Teorema**
+
+A partir do *Lema 1* e do *Lema 2*, percebe-se que o conjunto de escolhas ambiciosas realmente constroi um algoritimo ótimo (livre de prefixos) e, portanto, o algoritimo de codificação de Huffman é ótimo.
+</details>
 
 ### Considerações e Restrições
   - O algoritmo de Huffman pode ser aplicado a imagens, mas tem limitações.
   - Ele não leva em consideração a relação espacial entre pixels vizinhos, o que outros algoritmos (como JPEG) fazem.
-  - A compressão de imagens usando Huffman pode não ser tão eficiente quanto métodos baseados em entropia.
+  - O algoritimo de Huffman é minima, no sentido: nenhuma outra cadeia produzida por um código livre de prefixos é mais curtas que a cadeia produzida pelo código de Huffman, pois ela ajusta com o mínimo necessário para representar dado um conjunto de frequências.
 
 ## Screenshots
 Adicione 3 ou mais screenshots do projeto em funcionamento.
