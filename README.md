@@ -144,7 +144,7 @@ Adicione 3 ou mais screenshots do projeto em funcionamento.
 
 ## Instalação 
 **Linguagem**: Python<br>
-<br>
+
 **Biblotecas**:<br>
     - pip install pillow
     <br>
