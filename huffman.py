@@ -40,7 +40,6 @@ class CodificacaoHuffman:
         arvore = self._construir_arvore(fila)
         self._construir_codigos(arvore)
         texto_codificado = ''.join(self.codigos[char] for char in texto)
-
         texto_codificado_preenchido = self._preencher_texto_codificado(texto_codificado)
         bytes_codificados = bytearray()
         for i in range(0, len(texto_codificado_preenchido), 8):
@@ -51,7 +50,6 @@ class CodificacaoHuffman:
     def decodificar(self, bytes_codificados):
         string_bits = ''.join(format(byte, '08b') for byte in bytes_codificados)
         string_bits = self._remover_preenchimento(string_bits)
-
         codigo_atual = ''
         texto_decodificado = ''
         for bit in string_bits:
@@ -124,6 +122,7 @@ class AplicativoHuffman:
 
         self.caminho_arquivo = None
         self.caminho_arquivo_codificado = None
+        self.caminho_arquivo_arvore = None
 
     def carregar_arquivo(self):
         self.caminho_arquivo = filedialog.askopenfilename(
@@ -151,8 +150,8 @@ class AplicativoHuffman:
                 raise ValueError("Tipo de arquivo não suportado")
 
             bytes_codificados = self.codificacao_huffman.codificar(texto)
-            arquivo_arvore = self.caminho_arquivo + '.tree'
-            self.codificacao_huffman.salvar_arvore(arquivo_arvore)
+            self.caminho_arquivo_arvore = self.caminho_arquivo + '.tree'
+            self.codificacao_huffman.salvar_arvore(self.caminho_arquivo_arvore)
 
             caminho_arquivo_codificado = self.caminho_arquivo + '_encoded.bin'
             with open(caminho_arquivo_codificado, 'wb') as arquivo:
@@ -164,27 +163,29 @@ class AplicativoHuffman:
             messagebox.showerror("Erro", str(e))
 
     def decodificar_arquivo(self):
-        if not self.caminho_arquivo:
-            messagebox.showwarning("Aviso", "Por favor, carregue um arquivo primeiro.")
+        caminho_arquivo_codificado = filedialog.askopenfilename(
+            filetypes=[("Binary files", "*_encoded.bin")]
+        )
+        if not caminho_arquivo_codificado:
+            messagebox.showwarning("Aviso", "Nenhum arquivo codificado selecionado.")
+            return
+
+        caminho_arquivo_arvore = filedialog.askopenfilename(
+            filetypes=[("Tree files", "*.tree")]
+        )
+        if not caminho_arquivo_arvore:
+            messagebox.showwarning("Aviso", "Nenhum arquivo de árvore selecionado.")
             return
 
         try:
-            caminho_arquivo_codificado = filedialog.askopenfilename(
-                filetypes=[("Binary files", "*_encoded.bin")]
-            )
-            if not caminho_arquivo_codificado:
-                messagebox.showwarning("Aviso", "Nenhum arquivo codificado selecionado.")
-                return
-
-            arquivo_arvore = self.caminho_arquivo + '.tree'
-            self.codificacao_huffman.carregar_arvore(arquivo_arvore)
+            self.codificacao_huffman.carregar_arvore(caminho_arquivo_arvore)
 
             with open(caminho_arquivo_codificado, 'rb') as arquivo:
                 bytes_codificados = arquivo.read()
 
             texto_decodificado = self.codificacao_huffman.decodificar(bytes_codificados)
 
-            caminho_arquivo_decodificado = self.caminho_arquivo + '_decoded.txt'
+            caminho_arquivo_decodificado = caminho_arquivo_codificado.replace('_encoded.bin', '_decoded.txt')
             with open(caminho_arquivo_decodificado, 'w', encoding='utf-8') as arquivo:
                 arquivo.write(texto_decodificado)
 
