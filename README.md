@@ -7,7 +7,7 @@
 |Matrícula | Aluno |
 | -- | -- |
 | 22/1008786 |  Mateus Villela Consorte |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 22/1008679 |  Pablo Serra Carvalho|
 
 ### Motivação
 Com o intuito de aplicar a codificação de Huffman para além de um contexto puramente textual, este projeto motiva-se a trazer a perspectiva da compactação de arquivos de imagem. Nesse sentido,
