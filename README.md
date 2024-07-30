@@ -145,7 +145,7 @@ Adicione 3 ou mais screenshots do projeto em funcionamento.
 ## Instalação 
 **Linguagem**: Python<br>
 
-**Biblotecas**:<br>
+**Bibliotecas**:<br>
     - pip install pillow
     <br>
     - pip install numpy
