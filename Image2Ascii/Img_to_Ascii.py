@@ -2,6 +2,8 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import datetime as dt
 import string
+import os
+import shutil
 
 def hue_char(character):
   ''' Função que abstrai a tonalidade do caracter, contando o número de espaços não brancos. 
@@ -76,9 +78,36 @@ def image_to_ASCII(image_path, output_width=900):
 #ex: C:\\Users\\mateu\\OneDrive\\Área de Trabalho\\5° Semestre - UnB\\Projeto de Algoritimo\\Asciiart\\luffy_test.png
 #ex: C:\\Users\\mateu\\OneDrive\\Área de Trabalho\\5° Semestre - UnB\\Projeto de Algoritimo\\Asciiart\\spyder_test.jpg
 #ex: C:\\Users\\mateu\\OneDrive\\Área de Trabalho\\5° Semestre - UnB\\Projeto de Algoritimo\\Asciiart\\GTA6_test.jpg
-#image_to_ASCII('C:\\Users\\mateu\\OneDrive\\Área de Trabalho\\5° Semestre - UnB\\Projeto de Algoritimo\\Asciiart\\deadpool.jpg')
+image_to_ASCII('C:\\Users\\mateu\\OneDrive\\Área de Trabalho\\5° Semestre - UnB\\Projeto de Algoritimo\\Asciiart\\kimestu.jpg')
 
 
+def criar_pasta(nome_pasta:any, arquivos):
+    # define por padrão que o nome da pasta é o mesmo do primeiro arquivo
+    if(nome_pasta == any):
+        nome_pasta = os.path.basename(arquivos[0]).split('.')[0]
+    try:
+        # Verifica se a pasta já existe
+        if os.path.exists(nome_pasta):
+            print(f"A pasta '{nome_pasta}' já existe.")
+        else:
+            # Cria a pasta
+            os.mkdir(nome_pasta)
+            print(f"Pasta '{nome_pasta}' criada com sucesso!")
+
+        # Anexa os arquivos dentro da pasta
+        for arquivo in arquivos:
+            nome_arquivo = os.path.basename(arquivo)  # Obtém o nome do arquivo
+            caminho_destino = os.path.join(nome_pasta, nome_arquivo)
+
+            # Verifica se o arquivo já existe na pasta
+            if os.path.exists(caminho_destino):
+                print(f"O arquivo '{nome_arquivo}' já existe na pasta.")
+            else:
+                shutil.copy(arquivo, caminho_destino)
+                print(f"Arquivo '{nome_arquivo}' anexado com sucesso!")
+
+    except Exception as e:
+        print(f"Erro ao criar a pasta ou anexar arquivos: {e}")
 
 def hue_info_chars():
     ''' Função de Teste para verificar 'quantida de pigmentação' referente a cada caracter '''
