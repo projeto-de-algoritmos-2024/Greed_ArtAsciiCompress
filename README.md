@@ -151,8 +151,6 @@ Adicione 3 ou mais screenshots do projeto em funcionamento.
 
 ![Captura de tela 2024-07-30 003503](https://github.com/user-attachments/assets/d2c5e7e0-e022-4f8a-86d9-5a9a99bdc215)
 
-![Uploading Captura de tela 2024-07-30 003517.png…]()
-
 ![Captura de tela 2024-07-30 003517](https://github.com/user-attachments/assets/b61a54af-b9b8-411b-9625-c49feefd511d)
 
 ![Captura de tela 2024-07-30 003542](https://github.com/user-attachments/assets/beed1259-9a09-4dd7-ab2f-340c5d7a1e2d)
