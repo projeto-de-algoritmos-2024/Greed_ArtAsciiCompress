@@ -149,6 +149,7 @@ A partir do *Lema 1* e do *Lema 2*, percebe-se que o conjunto de escolhas ambici
 ![Captura de tela 2024-07-30 003443](https://github.com/user-attachments/assets/5f853482-0efe-4c01-95c5-670f382c9d95)
 
 ![Captura de tela 2024-07-30 003503](https://github.com/user-attachments/assets/d2c5e7e0-e022-4f8a-86d9-5a9a99bdc215)
+<br>
        Para descodificação são necessário dois arquivos o arquivo.bin e o arquivo.tree.
 ![Captura de tela 2024-07-30 003517](https://github.com/user-attachments/assets/b61a54af-b9b8-411b-9625-c49feefd511d)
 
