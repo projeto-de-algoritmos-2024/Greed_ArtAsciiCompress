@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog, messagebox, ttk
+from tkinter import filedialog, messagebox, ttk, simpledialog
 import heapq
 import os
 from collections import Counter
@@ -38,6 +38,9 @@ class CodificacaoHuffman:
             self.codigos_reversos[par[1]] = par[0]
 
     def codificar(self, texto):
+        # Para evitar interferencia de usos anteriores:
+        self.codigos.clear() # Limpar dicionário de códigos 
+        self.codigos_reversos.clear()  # Limpar dicionário de códigos reversos
         dicionario_frequencia = self._construir_dicionario_frequencia(texto)
         fila = self._construir_fila_prioridade(dicionario_frequencia)
         arvore = self._construir_arvore(fila)
@@ -115,13 +118,13 @@ class AplicativoHuffman:
         self.botao_upload = ttk.Button(self.frame, text="Carregar Arquivo", command=self.carregar_arquivo)
         self.botao_upload.pack(pady=10, fill=tk.X)
 
-        self.botao_codificar = ttk.Button(self.frame, text="Codificar Arquivo", command=self.codificar_arquivo)
+        self.botao_codificar = ttk.Button(self.frame, text="Comprimir Arquivo", command=self.codificar_arquivo)
         self.botao_codificar.pack(pady=10, fill=tk.X)
 
-        self.botao_decodificar = ttk.Button(self.frame, text="Decodificar Arquivo", command=self.decodificar_arquivo)
+        self.botao_decodificar = ttk.Button(self.frame, text="Descomprimir Arquivo", command=self.decodificar_arquivo)
         self.botao_decodificar.pack(pady=10, fill=tk.X)
 
-        self.botao_ascii = ttk.Button(self.frame, text="Converter Imagem em ASCII", command=self.converter_imagem_ascii)
+        self.botao_ascii = ttk.Button(self.frame, text="Converter Imagem em ASCII art", command=self.converter_imagem_ascii)
         self.botao_ascii.pack(pady=10, fill=tk.X)
 
         self.caminho_arquivo = None
@@ -143,6 +146,9 @@ class AplicativoHuffman:
             return
 
         try:
+            # obter o tamanho do arquivo original
+            tamanho_original = os.path.getsize(self.caminho_arquivo)
+
             extensao_arquivo = os.path.splitext(self.caminho_arquivo)[1]
             if extensao_arquivo == '.txt':
                 with open(self.caminho_arquivo, 'r', encoding='utf-8') as arquivo:
@@ -154,17 +160,49 @@ class AplicativoHuffman:
                 raise ValueError("Tipo de arquivo não suportado")
 
             bytes_codificados = self.codificacao_huffman.codificar(texto)
-            self.caminho_arquivo_arvore = self.caminho_arquivo + '.tree'
+            
+            # Cria uma subpasta para armazenar os arquivos .bin e .tree
+            pasta_output = self.criar_diretorio_output(self.caminho_arquivo, 1)
+
+            nome_base = os.path.basename(self.caminho_arquivo)
+            self.caminho_arquivo_arvore = os.path.join(pasta_output, nome_base + '.tree')
             self.codificacao_huffman.salvar_arvore(self.caminho_arquivo_arvore)
 
-            caminho_arquivo_codificado = self.caminho_arquivo + '_encoded.bin'
+            # Salvar a árvore e o arquivo comprimido
+            caminho_arquivo_codificado = os.path.join(pasta_output, nome_base + '_encoded.bin')
             with open(caminho_arquivo_codificado, 'wb') as arquivo:
                 arquivo.write(bytes_codificados)
 
-            messagebox.showinfo("Info", f"Arquivo codificado com sucesso como {caminho_arquivo_codificado}")
+            # Obter o tamanho do arquivo comprimido = .bin + .tree
+            tamanho_comprimido = os.path.getsize(caminho_arquivo_codificado)
+
+            # Calcular o percentual de compressão
+            razao_tamanho = tamanho_comprimido/tamanho_original
+            percentual_compressao = (1 - razao_tamanho ) * 100
+
+            # Formatar tamanhos para unidades legíveis
+            tamanho_original_formatado = self.tamanho_formatado(tamanho_original)
+            tamanho_comprimido_formatado = self.tamanho_formatado(tamanho_comprimido)
+
+            messagebox.showinfo("Info", f"Arquivo codificado com sucesso como {caminho_arquivo_codificado}\n")
+            messagebox.showinfo(
+                "Resultado",
+                f"Compressão: {tamanho_original_formatado} -> {tamanho_comprimido_formatado}\n"
+                f"Redução de {(percentual_compressao):.2f}%"
+            )
 
         except Exception as e:
             messagebox.showerror("Erro", str(e))
+    
+    @staticmethod
+    def tamanho_formatado(tamanho_bytes):
+        if tamanho_bytes == 0:
+            return "0B"
+        tamanho_nomes = ("B", "KB", "MB", "GB", "TB")
+        i = int(np.floor(np.log(tamanho_bytes) / np.log(1024)))
+        p = np.power(1024, i)
+        s = round(tamanho_bytes / p, 2)
+        return f"{s} {tamanho_nomes[i]}"
 
     def decodificar_arquivo(self):
         caminho_arquivo_codificado = filedialog.askopenfilename(
@@ -189,7 +227,11 @@ class AplicativoHuffman:
 
             texto_decodificado = self.codificacao_huffman.decodificar(bytes_codificados)
 
-            caminho_arquivo_decodificado = caminho_arquivo_codificado.replace('_encoded.bin', '_decoded.txt')
+            # Obter o diretório pai onde a pasta do arquivo codificado e da árvore está localizada
+            pasta_pai = os.path.dirname(os.path.dirname(caminho_arquivo_codificado))
+        
+            caminho_arquivo_decodificado = os.path.join(pasta_pai, os.path.splitext(os.path.splitext(os.path.basename(caminho_arquivo_codificado))[0])[0] + '.txt')
+
             with open(caminho_arquivo_decodificado, 'w', encoding='utf-8') as arquivo:
                 arquivo.write(texto_decodificado)
 
@@ -200,14 +242,23 @@ class AplicativoHuffman:
 
     def converter_imagem_ascii(self):
         caminho_imagem = filedialog.askopenfilename(
-            filetypes=[("Image files", "*.jpg;*.jpeg;*.png")]
+            filetypes=[("Image files", "*.jpg;*.jpeg;*.png;*.bmp;*.tiff")]
         )
         if not caminho_imagem:
             messagebox.showwarning("Aviso", "Nenhuma imagem selecionada.")
             return
 
+        largura = simpledialog.askinteger("Largura da Arte ASCII", "Insira a largura da arte ASCII (entre 100 e 900):", initialvalue= 720, minvalue=100, maxvalue=900)
+        if not largura:
+            messagebox.showwarning("Aviso", "Largura não selecionada.")
+            return
+        if largura < 720:
+            resposta = messagebox.askokcancel("Atenção", "Abaixo de 720, pode-se tornar mais dificil a compreensão da imagem. Prosseguir ?")
+            if not resposta:
+                return # operação cancelada caso cancele   
+
         try:
-            self.image_to_ASCII(caminho_imagem)
+            self.image_to_ASCII(caminho_imagem, largura)
             messagebox.showinfo("Info", "Imagem convertida para ASCII com sucesso.")
         except Exception as e:
             messagebox.showerror("Erro", str(e))
@@ -225,6 +276,26 @@ class AplicativoHuffman:
         quantidade_preenchida = np.sum(array_imagem < 255)
 
         return quantidade_preenchida
+    
+    @staticmethod
+    def criar_diretorio_output(caminho_arquivo, arquivo_compactado= 0):
+        # Diretório de saída padrão
+        output_root_dir = "outputs"
+        if not os.path.exists(output_root_dir):
+            os.makedirs(output_root_dir)
+
+        # Nome da subpasta baseado no nome do arquivo
+        nome_base = os.path.basename(caminho_arquivo)
+        nome_pasta = os.path.splitext(nome_base)[0]
+        if arquivo_compactado:
+            nome_pasta += ".huff"
+
+        # Caminho completo para a subpasta
+        pasta_output = os.path.join(output_root_dir, nome_pasta)
+        if not os.path.exists(pasta_output):
+            os.makedirs(pasta_output)
+
+        return pasta_output
 
     def image_to_ASCII(self, image_path, output_width=720):
         try:
@@ -233,9 +304,25 @@ class AplicativoHuffman:
             print(f"Imagem não encontrada: {image_path}")
             return
 
-        aspect_ratio = img.height / img.width
-        new_height = aspect_ratio * output_width * 0.5
-        img = img.resize((output_width, int(new_height)))
+        # Cria uma subpasta para armazenar o arquivo ASCII
+        pasta_output = self.criar_diretorio_output(image_path)
+
+        # medidas da tela
+        screen_width = self.raiz.winfo_screenwidth()
+        screen_height = self.raiz.winfo_screenheight()
+        aspect_ratio_screen = screen_height/screen_width # proporção da tela
+        
+        #medidas adptadas da imagem (altura/largura)
+        aspect_ratio = img.height / img.width # proporção da imagem
+
+        # Tem se que as seguinte ajustes são otimos: 720p => 0.7 & 900p => 0.75 & 360p => 0.68
+        # Por Regressão quadratica: f(x) = (4.0*10^-7) * x^2+ -0.00039*x + 0,77
+        adjustment_factor = (4 * 10**(-7))*(output_width**2) + (-3.9 * 10**(-4)) * output_width + 0.77
+
+        # nova altura calculada com ajustes
+        new_height = int(aspect_ratio * output_width * aspect_ratio_screen * adjustment_factor) 
+
+        img = img.resize((output_width, new_height))
 
         img = img.convert('L')
 
@@ -254,13 +341,14 @@ class AplicativoHuffman:
         ascii_image = [new_pixels[index:index + output_width] for index in range(0, len(new_pixels), output_width)]
         ascii_image = "\n".join(ascii_image)
 
-        archive_name = image_path.split("\\")[-1].split(".")[0]
+        # Salvar a arte ASCII no arquivo dentro da subpasta criada
+        nome_base = os.path.splitext(os.path.basename(image_path))[0]
         timestamp = int(dt.datetime.now().timestamp())
-        output_filename = f"{archive_name}_ASCII_art_{timestamp}.txt"
+        output_filename = os.path.join(pasta_output, f"{nome_base}_{timestamp}_artAscii.txt")
         with open(output_filename, "w", encoding='utf-8') as f:
             f.write(ascii_image)
 
-        print(f"Arte ASCII salva em {output_filename}")
+        print(f"Arte ASCII salva in {output_filename}")
 
 if __name__ == "__main__":
     raiz = tk.Tk()
