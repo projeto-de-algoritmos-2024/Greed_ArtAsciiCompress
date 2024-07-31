@@ -140,7 +140,6 @@ A partir do *Lema 1* e do *Lema 2*, percebe-se que o conjunto de escolhas ambici
   - O algoritimo de Huffman é minima, no sentido: nenhuma outra cadeia produzida por um código livre de prefixos é mais curtas que a cadeia produzida pelo código de Huffman, pois ela ajusta com o mínimo necessário para representar dado um conjunto de frequências.
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
 ![Captura de tela 2024-07-30 212914](https://github.com/user-attachments/assets/771a2785-15cc-46ad-a031-4a0a733b754b)
 
 ![Captura de tela 2024-07-30 212938](https://github.com/user-attachments/assets/e93d2228-5183-4a0b-82d8-142dce5b63bd)
@@ -150,7 +149,7 @@ Adicione 3 ou mais screenshots do projeto em funcionamento.
 ![Captura de tela 2024-07-30 003443](https://github.com/user-attachments/assets/5f853482-0efe-4c01-95c5-670f382c9d95)
 
 ![Captura de tela 2024-07-30 003503](https://github.com/user-attachments/assets/d2c5e7e0-e022-4f8a-86d9-5a9a99bdc215)
-
+**Paea descodificação são necessário dois arquivos o arquivo.bin e o arquivo.tree
 ![Captura de tela 2024-07-30 003517](https://github.com/user-attachments/assets/b61a54af-b9b8-411b-9625-c49feefd511d)
 
 ![Captura de tela 2024-07-30 003542](https://github.com/user-attachments/assets/beed1259-9a09-4dd7-ab2f-340c5d7a1e2d)
