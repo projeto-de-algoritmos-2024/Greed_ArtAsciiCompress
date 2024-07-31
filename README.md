@@ -150,13 +150,13 @@ A partir do *Lema 1* e do *Lema 2*, percebe-se que o conjunto de escolhas ambici
 
 ![Captura de tela 2024-07-30 003503](https://github.com/user-attachments/assets/d2c5e7e0-e022-4f8a-86d9-5a9a99bdc215)
 <br>
-       Para descodificação são necessário dois arquivos o arquivo.bin e o arquivo.tree.
+       **Para descodificação são necessário dois arquivos o arquivo.bin e o arquivo.tree.**
 ![Captura de tela 2024-07-30 003517](https://github.com/user-attachments/assets/b61a54af-b9b8-411b-9625-c49feefd511d)
 
 ![Captura de tela 2024-07-30 003542](https://github.com/user-attachments/assets/beed1259-9a09-4dd7-ab2f-340c5d7a1e2d)
 
 ![Captura de tela 2024-07-30 003554](https://github.com/user-attachments/assets/f6ad58a7-e2ab-474c-8bb1-80acaa42e4c7) 
-      Resultado Final.
+      **Resultado Final.**
 ![Captura de tela 2024-07-30 215146](https://github.com/user-attachments/assets/54675b5c-7d34-4b72-9135-1d1ae83e15aa)
 
 ## Instalação 
