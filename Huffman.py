@@ -87,9 +87,26 @@ class CodificacaoHuffman:
 class AplicativoHuffman:
     def __init__(self, raiz):
         self.raiz = raiz
-        self.raiz.title("Compressão Huffman")
+        self.raiz.title("ArtCompress")
         self.raiz.geometry("600x500")
         self.raiz.configure(bg='#f3efef')
+
+        self.titulo_ascii_art = """                                                                                                             .         .                                                                                      
+         .8.          8 888888888o. 8888888 8888888888               ,o888888o.        ,o888888o.           ,8.       ,8.          8 888888888o   8 888888888o.   8 8888888888     d888888o.      d888888o.   
+        .888.         8 8888    `88.      8 8888                    8888     `88.   . 8888     `88.        ,888.     ,888.         8 8888    `88. 8 8888    `88.  8 8888         .`8888:' `88.  .`8888:' `88. 
+       :88888.        8 8888     `88      8 8888                 ,8 8888       `8. ,8 8888       `8b      .`8888.   .`8888.        8 8888     `88 8 8888     `88  8 8888         8.`8888.   Y8  8.`8888.   Y8 
+      . `88888.       8 8888     ,88      8 8888                 88 8888           88 8888        `8b    ,8.`8888. ,8.`8888.       8 8888     ,88 8 8888     ,88  8 8888         `8.`8888.      `8.`8888.     
+     .8. `88888.      8 8888.   ,88'      8 8888                 88 8888           88 8888         88   ,8'8.`8888,8^8.`8888.      8 8888.   ,88' 8 8888.   ,88'  8 888888888888  `8.`8888.      `8.`8888.    
+    .8`8. `88888.     8 888888888P'       8 8888                 88 8888           88 8888         88  ,8' `8.`8888' `8.`8888.     8 888888888P'  8 888888888P'   8 8888           `8.`8888.      `8.`8888.   
+   .8' `8. `88888.    8 8888`8b           8 8888                 88 8888           88 8888        ,8P ,8'   `8.`88'   `8.`8888.    8 8888         8 8888`8b       8 8888            `8.`8888.      `8.`8888.  
+  .8'   `8. `88888.   8 8888 `8b.         8 8888                 `8 8888       .8' `8 8888       ,8P ,8'     `8.`'     `8.`8888.   8 8888         8 8888 `8b.     8 8888        8b   `8.`8888. 8b   `8.`8888. 
+ .888888888. `88888.  8 8888   `8b.       8 8888                    8888     ,88'   ` 8888     ,88' ,8'       `8        `8.`8888.  8 8888         8 8888   `8b.   8 8888        `8b.  ;8.`8888 `8b.  ;8.`8888 
+.8'       `8. `88888. 8 8888     `88.     8 8888                     `8888888P'        `8888888P'  ,8'         `         `8.`8888. 8 8888         8 8888     `88. 8 888888888888 `Y8888P ,88P'  `Y8888P ,88P' 
+        """
+
+        # Adicionar o título em ASCII Art à interface
+        titulo_label = tk.Label(self.raiz, text=self.titulo_ascii_art, font=("Courier", 3), justify=tk.CENTER)
+        titulo_label.pack(pady=10, padx=10, anchor='center')
 
         self.codificacao_huffman = CodificacaoHuffman()
 
@@ -126,6 +143,9 @@ class AplicativoHuffman:
 
         self.botao_ascii = ttk.Button(self.frame, text="Converter Imagem em ASCII art", command=self.converter_imagem_ascii)
         self.botao_ascii.pack(pady=10, fill=tk.X)
+
+        self.botao_abrir_arquivo = ttk.Button(self.raiz, text="Visualizar ASCII art", command=self.abrir_arquivo_ascii)
+        self.botao_abrir_arquivo.pack(pady=10)
 
         self.caminho_arquivo = None
         self.caminho_arquivo_codificado = None
@@ -255,11 +275,12 @@ class AplicativoHuffman:
         if largura < 720:
             resposta = messagebox.askokcancel("Atenção", "Abaixo de 720, pode-se tornar mais dificil a compreensão da imagem. Prosseguir ?")
             if not resposta:
-                return # operação cancelada caso cancele   
+                return # operação cancelada 
 
         try:
-            self.image_to_ASCII(caminho_imagem, largura)
-            messagebox.showinfo("Info", "Imagem convertida para ASCII com sucesso.")
+            output_filename, ascii_art = self.image_to_ASCII(caminho_imagem, largura)
+            messagebox.showinfo("Info", f"Imagem convertida para ASCII com sucesso. Arquivo salvo em: {output_filename}")
+            self.mostrar_ascii_art(ascii_art)
         except Exception as e:
             messagebox.showerror("Erro", str(e))
 
@@ -349,6 +370,65 @@ class AplicativoHuffman:
             f.write(ascii_image)
 
         print(f"Arte ASCII salva in {output_filename}")
+        
+        return output_filename, ascii_image
+    
+    def mostrar_ascii_art(self, ascii_art):
+        
+        # "Lucida Console" => melhorar representação e proporção
+        def aumentar_fonte():
+            tamanho_atual = text_widget.cget("font").split(" ")[-1]
+            novo_tamanho = int(tamanho_atual) + 2
+            text_widget.config(font=("Lucida Console", novo_tamanho))
+
+        def diminuir_fonte():
+            tamanho_atual = text_widget.cget("font").split(" ")[-1]
+            novo_tamanho = max(1, int(tamanho_atual) - 2)  # Limite mínimo de 6 para evitar tamanho muito pequeno
+            text_widget.config(font=("Lucida Console", novo_tamanho))
+
+        janela_ascii = tk.Toplevel(self.raiz)
+        janela_ascii.title("Visualização ASCII Art")
+
+        largura = self.raiz.winfo_screenwidth()
+        altura = self.raiz.winfo_screenheight()
+        janela_ascii.geometry(f"{int(largura * 0.4)}x{int(altura * 0.8)}")
+
+        text_widget = tk.Text(janela_ascii, wrap=tk.NONE, font=('Lucida Console', 10))
+        text_widget.insert(tk.END, ascii_art)
+        text_widget.config(state=tk.DISABLED)  # Tornar o widget de texto somente leitura
+        text_widget.pack(expand=True, fill=tk.BOTH)
+
+        scrollbar_y = ttk.Scrollbar(janela_ascii, orient='vertical', command=text_widget.yview)
+        text_widget.config(yscrollcommand=scrollbar_y.set)
+        scrollbar_y.pack(side=tk.RIGHT, fill=tk.Y)
+
+        scrollbar_x = ttk.Scrollbar(janela_ascii, orient='horizontal', command=text_widget.xview)
+        text_widget.config(xscrollcommand=scrollbar_x.set)
+        scrollbar_x.pack(side=tk.BOTTOM, fill=tk.X)
+
+        frame_botoes = ttk.Frame(janela_ascii)
+        frame_botoes.pack(pady=5)
+
+        botao_zoom_in = ttk.Button(frame_botoes, text="Zoom In", command=aumentar_fonte)
+        botao_zoom_in.grid(row=0, column=0, padx=5)
+
+        botao_zoom_out = ttk.Button(frame_botoes, text="Zoom Out", command=diminuir_fonte)
+        botao_zoom_out.grid(row=0, column=1, padx=5)
+
+    def abrir_arquivo_ascii(self):
+        caminho_arquivo = filedialog.askopenfilename(
+            filetypes=[("Text files", "*.txt")]
+        )
+        if not caminho_arquivo:
+            messagebox.showwarning("Aviso", "Nenhum arquivo selecionado.")
+            return
+
+        try:
+            with open(caminho_arquivo, "r", encoding='utf-8') as f:
+                ascii_art = f.read()
+            self.mostrar_ascii_art(ascii_art)
+        except Exception as e:
+            messagebox.showerror("Erro", str(e))
 
 if __name__ == "__main__":
     raiz = tk.Tk()
